@@ -1,0 +1,20 @@
+# Örnek .htaccess kuralları
+
+# Charset ayarı
+AddDefaultCharset UTF-8
+
+# Hata sayfalarını yönlendirme
+#ErrorDocument 404 /hatalar/404.html
+
+# Yönlendirme kuralları
+RewriteEngine On
+RewriteBase /newTrial/
+RewriteRule ^register$ /newTrial/enterance/register.php [L]
+RewriteRule ^login$ /newTrial/enterance/index.php [L]
+RewriteRule ^forgot-pass$ /newTrial/enterance/forgot.php [L]
+RewriteRule ^process$ /newTrial/queries/userProcess.php [L]
+
+# Erişim kısıtlama
+Order deny,allow
+Deny from 192.168.0.1
+Allow from all
