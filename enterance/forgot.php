@@ -15,18 +15,18 @@
 				<div class="inside-container">
 					<div class="fontuser">
 						<label><b>Username</b></label>
-						<input type="text" placeholder="Enter Username" name="uname" required>
+						<input type="text" placeholder="Enter Username" name="ntUsername" required>
 						<i class="fa fa-user fa-lg"></i>
 					</div>
 
 					<div class="register-container">
 						<div class="register-button-container">
-						  <button type="submit">Reset Password</button>
+						  <button type="submit" name="ntResetPassButton">Reset Password</button>
 						</div>
 					</div>
 
 					<div class="register-forgot">
-						<a href="index.html">Login</a> | <a href="register.html">Register</a>
+						<a href="login">Login</a> | <a href="register">Register</a>
 					</div>
 				</div>
 				<div class="divider"></div>
