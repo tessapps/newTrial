@@ -1,11 +1,11 @@
 <?php
 //Sunucu Tarafı
-$servername = "67.223.118.106"; //localhost
+$servername = "mysql.dinamo.net.tr:3306"; //localhost
 $database = "tessjrdd_newTrial_DB";  //yaslsbvj_
 $username = "tessjrdd_newTrial_DB_User";  //yaslsbvj_
 $password = "p@2*byy3LBGI!Rgl";
 
-echo ($servername."<br>");
+//echo ($servername."<br>");
 
 $dsn = "mysql:host=$servername;dbname=$database;charset=UTF8";
 
@@ -16,7 +16,7 @@ try {
 	  ]);
 
 	if ($konn) {
-		echo "Connected to the $database database successfully!";
+		//echo "Connected to the $database database successfully!";
 	}
 } catch (PDOException $e) {
 	echo $e->getMessage();

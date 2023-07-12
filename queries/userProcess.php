@@ -1,4 +1,9 @@
 <?php
 
-echo ($_POST["ntUsername"]);
+include ("konfig/dbKonnDetails.php");
+
+if (isset($_POST["ntRegisterButton"])){
+    //$check
+}
+
 ?>
