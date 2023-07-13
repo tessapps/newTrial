@@ -35,7 +35,7 @@
 
 					<div class="register-container">
 						<div class="register-button-container">
-						  <button type="submit" name="ntRegisterButton">Register</button>
+						  <button type="submit" name="ntRegisterButton" value="ntRegisterButton">Register</button>
 						</div>
 					</div>
 
@@ -103,7 +103,7 @@ $(document).ready(function() {
         // Belirli bir süre sonra yönlendirme yap
         setTimeout(function() {
           window.location.href = 'login';
-        }, 10000); // 3000 milisaniye (3 saniye) sonra yönlendirir
+        }, 3000); // 3000 milisaniye (3 saniye) sonra yönlendirir
       },
       error: function() {
         // AJAX isteği başarısız olduğunda çalışır

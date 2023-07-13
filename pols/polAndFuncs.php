@@ -104,5 +104,21 @@ function substr_close_tags($code, $limit = 400)
     return substr($code, 0, $position).$close_tag."...";
 }
 
+function insertData($table_name, $data_array, $connection) {
+    // Tablo adı ve veri dizisi alınır
+    // Bağlantı parametresi olarak alınır
+    echo ("in");
+    // Sorgu oluşturulur
+    $columns = implode(", ", array_keys($data_array));
+    $values = implode(", ", array_fill(0, count($data_array), "?"));
+    $query = "INSERT INTO $table_name ($columns) VALUES ($values)";
+    
+    // Sorgu hazırlanır ve çalıştırılır
+    $statement = $connection->prepare($query);
+    $statement->execute(array_values($data_array));
+    
+    // Bağlantı kapatılır
+    $connection = null;
+}
 
 ?>
