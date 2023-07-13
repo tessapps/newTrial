@@ -11,14 +11,10 @@ require ('../PHPMailer/src/Exception.php');
 require ('../PHPMailer/src/PHPMailer.php');
 require ('../PHPMailer/src/SMTP.php');
 
-echo("first");
-
-if (isset($_POST["ntRegisterButton"]) 
-// && 
-//     ($_POST["ntPassword"] == $_POST["ntPasswordRe"]) &&
-//     trim($_POST["ntPassword"]) != "" &&
-//     trim($_POST["ntUsername"]) != ""
-) 
+if (isset($_POST["ntRegisterButton"])  && 
+    ($_POST["ntPassword"] == $_POST["ntPasswordRe"]) &&
+    trim($_POST["ntPassword"]) != "" &&
+    trim($_POST["ntUsername"]) != "" ) 
 	{
 
         $key = $GLOBALS["keyWord"];
@@ -58,7 +54,7 @@ if (isset($_POST["ntRegisterButton"])
 		);
 		
 		// İşlevi çağırın
-		//insertData('userBasicTable', $data, $konn);
+		insertData('userBasicTable', $data, $konn);
 
         // $myQuery = "INSERT INTO userBasicTable (userDetailID, userMail, userPassword, registerCode, activePos) VALUES(:userDetailID, :userMail, :userPassword, :registerCode, :activePos)";
 

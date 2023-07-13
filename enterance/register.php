@@ -84,13 +84,15 @@ $(document).ready(function() {
     $('#loadingModal').show();
 
     // AJAX isteği gönder
+    var formData = $(this).serialize();
+    formData += '&ntRegisterButton=' + encodeURIComponent('ntRegisterButton'); // Button değerini ekleyin
+
     $.ajax({
       url: $(this).attr('action'),
       type: $(this).attr('method'),
-      data: $(this).serialize(),
+      data: formData,
       success: function(response) {
         // AJAX isteği başarılı olduğunda çalışır
-
         // İşlem tamamlandığı için karartma efektini gizle
         $('#loadingModal').hide();
 
@@ -103,7 +105,7 @@ $(document).ready(function() {
         // Belirli bir süre sonra yönlendirme yap
         setTimeout(function() {
           window.location.href = 'login';
-        }, 3000); // 3000 milisaniye (3 saniye) sonra yönlendirir
+        }, 13000); // 3000 milisaniye (3 saniye) sonra yönlendirir
       },
       error: function() {
         // AJAX isteği başarısız olduğunda çalışır
@@ -112,5 +114,6 @@ $(document).ready(function() {
     });
   });
 });
+
 
 </script>

@@ -40,6 +40,21 @@ body {
 			opacity: 0.8;
 		}
 
+		.greenButton {
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0px;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		/* Set a hover effect for the button */
+		.greenButton:hover {
+			opacity: 0.8;
+		}
+
 		/* Set extra style for the cancel button */
 		.container {
 			background-color: #f8f8f8;
