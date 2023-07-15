@@ -13,6 +13,9 @@ RewriteRule ^register$ /newTrial/enterance/register.php [L]
 RewriteRule ^login$ /newTrial/enterance/index.php [L]
 RewriteRule ^forgot-pass$ /newTrial/enterance/forgot.php [L]
 RewriteRule ^process$ /newTrial/queries/userProcess.php [L]
+RewriteRule ^activate$ /newTrial/enterance/activation.php [L]
+RewriteRule ^index$ /newTrial/index.php [L]
+RewriteRule ^resetpassword$ /newTrial/enterance/resetPass.php [L]
 
 # Erişim kısıtlama
 Order deny,allow

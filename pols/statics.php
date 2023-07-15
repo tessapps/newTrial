@@ -1,8 +1,8 @@
 <?php
 
 $GLOBALS["authRequired"] = false;
-$GLOBALS["globalLink"] = "https://yaslibakim-portali.com/partner/act/";
-$GLOBALS["siteName"] = "Yaşlı Bakım Portalı";
+$GLOBALS["globalLink"] = "localhost/newTrial/";
+$GLOBALS["siteName"] = "Deneme Portalı";
 $GLOBALS["keyWord"] = "teSS_lime";
 
 ?>

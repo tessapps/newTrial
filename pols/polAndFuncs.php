@@ -107,7 +107,7 @@ function substr_close_tags($code, $limit = 400)
 function insertData($table_name, $data_array, $connection) {
     // Tablo adı ve veri dizisi alınır
     // Bağlantı parametresi olarak alınır
-    echo ("in");
+    
     // Sorgu oluşturulur
     $columns = implode(", ", array_keys($data_array));
     $values = implode(", ", array_fill(0, count($data_array), "?"));
@@ -119,6 +119,86 @@ function insertData($table_name, $data_array, $connection) {
     
     // Bağlantı kapatılır
     $connection = null;
+}
+
+function checkDataExists($tableName, $connection, $whereData) {
+    // where verilerini hazırla
+    $where = '';
+    $params = array();
+    foreach ($whereData as $key => $value) {
+        $where .= $key . ' = :' . $key . ' AND ';
+        $params[':' . $key] = $value;
+    }
+    $where = rtrim($where, ' AND ');
+
+    // Sorguyu hazırla ve yürüt
+    $query = "SELECT COUNT(*) FROM $tableName WHERE $where";
+    $statement = $connection->prepare($query);
+    $statement->execute($params);
+
+    // Sonucu al
+    $count = $statement->fetchColumn();
+
+    //$connection = null;
+
+    // Sonucu değerlendir ve true/false döndür
+    if ($count > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updateTable($tableName, $connection, $updateData, $whereData) {
+    // Güncellenecek verileri hazırla
+    $set = '';
+    $params = array();
+    foreach ($updateData as $key => $value) {
+        $set .= $key . ' = :' . $key . ', ';
+        $params[':' . $key] = $value;
+    }
+    $set = rtrim($set, ', ');
+
+    // Where cümlesini hazırla
+    $where = '';
+    foreach ($whereData as $key => $value) {
+        $where .= $key . ' = :' . $key . ' AND ';
+        $params[':' . $key] = $value;
+    }
+    $where = rtrim($where, ' AND ');
+
+    // Sorguyu hazırla ve yürüt
+    //echo "UPDATE $tableName SET $set WHERE $where";
+    $query = "UPDATE $tableName SET $set WHERE $where";
+    $statement = $connection->prepare($query);
+    $statement->execute($params);
+
+    // Güncelleme başarılıysa true döndür
+
+    //$connection = null;
+    return true;
+}
+
+function selectTableWithWhere($tableName, $connection, $whereData) {
+    // Where cümlesini hazırla
+    $where = '';
+    $params = array();
+    foreach ($whereData as $key => $value) {
+        $where .= $key . ' = :' . $key . ' AND ';
+        $params[':' . $key] = $value;
+    }
+    $where = rtrim($where, ' AND ');
+
+    // Sorguyu hazırla ve yürüt
+    $query = "SELECT * FROM $tableName WHERE $where";
+    $statement = $connection->prepare($query);
+    $statement->execute($params);
+
+    // Verileri al
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // Verileri dizi olarak döndür
+    return $result;
 }
 
 ?>

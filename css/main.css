@@ -226,7 +226,7 @@ body {
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.8);
 		}
 		  
 		#loadingSpinner {
@@ -242,7 +242,8 @@ body {
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			/* Bilgilendirme mesajı stilini buraya ekleyebilirsiniz */
+			color: #cccccc;
+			text-align: center;
 		}
 
 

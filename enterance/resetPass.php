@@ -1,3 +1,61 @@
+<?php
+
+include ("../konfig/dbKonnDetails.php");
+include ("../pols/polAndFuncs.php");
+include ("../pols/statics.php");
+
+  if (isset($_GET["uM"]) && isset($_GET["uI"])){
+    $tableName = 'userBasicTable';
+    $whereData = array(
+        'userMail' => $_GET["uM"],
+        'userActivationCode' => $_GET["uI"]
+    );
+
+    $dataExists = checkDataExists($tableName, $konn, $whereData);
+    if ($dataExists) {
+        $whereArray = array(
+            'userMail' => $_GET["uM"],
+            'userActivationCode' => $_GET["uI"]
+        );
+        $data = selectTableWithWhere('userBasicTable', $konn, $whereArray);
+
+        foreach ($data as $row) {
+            $unixTime = strtotime($row['userActivationTime']);
+
+            // 3 saat ekleyerek sonraki tarih ve saati hesapla
+            $futureTime = $unixTime + (3 * 60 * 60); // 3 saat = 3 * 60 dakika * 60 saniye
+
+            // Geçerli tarih ve saati al
+            $currentDateTime = time();
+
+            if ($currentDateTime <= $futureTime) {
+                // İşlem yapılacaksa
+                //echo "İşlem yapılıyor...";
+            } else {
+                // İşlem yapılmayacaksa
+                alert("Your activation period has expired. Get new activation code");
+                echo yonlendir(0,"login");
+            }
+        }
+        
+
+        $dataPos = true;
+        $messageList = array("Your account is updating...", 
+                            "Please wait...", 
+                            "Creating tables...",
+                            "Your account has been updated.",
+                            "You are being redirected.");
+    } else {
+        $dataPos = false;
+        $messageList = array("This account is already active.", 
+                            "You are being redirected.");
+    }
+  }
+  else {
+    echo yonlendir("1","index");
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,35 +70,33 @@
 <body>
 	<div class="container">
 		<div class="form-container">
-			<h2>Register</h2>
+			<h2>Reset Password</h2>
 			<form id="myForm" action="process" method="post">
 				<div class="inside-container">
-					<div class="fontuser">
-						<label><b>Username</b></label>
-						<input type="text" placeholder="Enter Username" name="ntUsername" required>
-						<i class="fa fa-user fa-lg"></i>
-					</div>
 
 					<div class="fontpassword">
-						<label><b>Password</b></label>
+						<label><b>New Password</b></label>
 						<input type="password" placeholder="Enter Password" name="ntPassword" required>
 						<i class="fa fa-key fa-lg"></i>
 					</div>
 
                     <div class="fontpassword">
-						<label><b>Password Again</b></label>
+						<label><b>New Password Again</b></label>
 						<input type="password" placeholder="Enter Password Again" name="ntPasswordRe" required>
 						<i class="fa fa-key fa-lg"></i>
 					</div>
 
+                    <input type="hidden" name="ntUsername" value="<?php echo ($_GET["uM"]); ?>">
+                    <input type="hidden" name="ntRegisterCode" value="<?php echo ($_GET["uI"]); ?>">
+
 					<div class="register-container">
 						<div class="register-button-container">
-						  <button type="submit" name="ntRegisterButton" value="ntRegisterButton">Register</button>
+						  <button type="submit" name="ntResetPasswordButton" value="ntResetPasswordButton">Reset Password</button>
 						</div>
 					</div>
 
 					<div class="register-forgot">
-						<a href="login">Login</a> | <a href="forgot-pass">Forgot Password?</a>
+						<a href="login">Login</a> | <a href="register">Register</a>
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -85,7 +141,7 @@ $(document).ready(function() {
 
     // AJAX isteği gönder
     var formData = $(this).serialize();
-    formData += '&ntRegisterButton=' + encodeURIComponent('ntRegisterButton'); // Button değerini ekleyin
+    formData += '&ntResetPasswordButton=' + encodeURIComponent('ntResetPasswordButton'); // Button değerini ekleyin
 
     $.ajax({
       url: $(this).attr('action'),
